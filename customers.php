@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: WooCommerce Customers by Product Order
+Plugin Name: WooCommerce Customers by Product Purchase
 Plugin URI: http://tareq.wedevs.com/
-Description: Description
+Description: Find customers by product purchase
 Version: 0.1
 Author: Tareq Hasan
 Author URI: http://tareq.wedevs.com/
