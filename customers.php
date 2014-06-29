@@ -88,6 +88,12 @@ class WC_Customers_By_Product_Order {
         load_plugin_textdomain( 'wc-customer-by-order', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
+    /**
+     * Adds tab to WooCommerce customer report tab
+     *
+     * @param  array $reports
+     * @return array
+     */
     function woocommerce_admin_reports( $reports ) {
         $reports['customers']['reports']['customer-list-product'] = array(
             'title'       => __( 'Customer List by Product', 'wc-customer-by-order' ),
@@ -99,12 +105,22 @@ class WC_Customers_By_Product_Order {
         return $reports;
     }
 
+    /**
+     * Report callback
+     *
+     * @return void
+     */
     function get_report() {
         $products = $this->get_products();
 
         include dirname( __FILE__ ) . '/view.php';
     }
 
+    /**
+     * Get product list
+     *
+     * @return array
+     */
     public function get_products() {
         $the_query = new WP_Query( array(
             'post_type'      => 'product',
@@ -121,6 +137,12 @@ class WC_Customers_By_Product_Order {
         return $options;
     }
 
+    /**
+     * Get users by a product
+     *
+     * @param  int $product_id
+     * @return array
+     */
     function get_users( $product_id ) {
         global $wpdb;
 
@@ -137,7 +159,6 @@ class WC_Customers_By_Product_Order {
                 LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
 
                 WHERE o.post_type = 'shop_order' AND
-
                     um.meta_key = '_customer_user' AND
                     oim.meta_key = '_product_id' AND
                     oim.meta_value = %d
